@@ -2,7 +2,7 @@ import discord
 import responses
 from discord.ext import tasks
 import asyncio 
-
+import discordtoken
 async def send_message(message, user_message, is_private):
     try:
         response = responses.handle_response(user_message)
@@ -11,7 +11,7 @@ async def send_message(message, user_message, is_private):
         print(e)
 
 def run_discord_bot():
-    TOKEN = 'MTE3NjYxNDI0NzUxMDMxMDkyMg.G6hoXg.CZd_F3ujFb4c8_SbXjvfMCY7wx2-6Qz-OWLLi4'
+    TOKEN = discordtoken.get_discordtoken()
     intents = discord.Intents().all()
     client = discord.Client(intents=intents)
     
