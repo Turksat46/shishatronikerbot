@@ -20,7 +20,7 @@ def run_discord_bot():
         print(f'{client.user} is now running!')
         vc = client.get_channel(1176634041835982989)
         try:
-            player = await vc.connect()
+            player = await vc.connect(self_deaf=True)
             #player = vc.create_ffmpeg_player("shisha.mp3", after=lambda: print("Spiele sound ab"))
             #player.star
             while True:
@@ -36,14 +36,15 @@ def run_discord_bot():
         
         username = str(message.author)
         user_message = str(message.content)
-        channel = str(message.channel)
+        channel = str(message.channel.id)
 
-        print(f"{username} said: '{user_message}' ({channel})")
+        print(f"{username} said: '{user_message}' {channel})")
 
         if user_message[0] == '?':
             user_message = user_message[1:]
             await send_message(message, user_message, is_private=True)
         else:
-            await send_message(message, user_message, is_private=False)
+            if str(message.channel.id) == '795364743854030858':
+                await send_message(message, user_message, is_private=False)
 
     client.run(TOKEN)
